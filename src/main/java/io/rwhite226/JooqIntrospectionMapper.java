@@ -54,13 +54,13 @@ public class JooqIntrospectionMapper implements RecordMapperProvider {
         }
     }
 
-    JooqIntrospectionMapper(Configuration configuration, RecordMapperProvider fallbackProvider) {
+    public JooqIntrospectionMapper(Configuration configuration, RecordMapperProvider fallbackProvider) {
         Objects.requireNonNull(configuration);
         this.fallbackProvider = fallbackProvider;
         this.configuration = configuration;
     }
 
-    JooqIntrospectionMapper(Configuration configuration) {
+    public JooqIntrospectionMapper(Configuration configuration) {
         this(configuration, null);
     }
 
