@@ -28,32 +28,6 @@ public class JooqIntrospectionMapper implements RecordMapperProvider {
     protected final RecordMapperProvider fallbackProvider;
     protected final Configuration configuration;
 
-    /**
-     * Pair class to hold the recordType and type to use as compound keys to lookup the cached RecordMapper
-     */
-    protected static class Pair {
-        final RecordType<?> recordType;
-        final Class<?> type;
-
-        Pair(RecordType<?> recordType, Class<?> type) {
-            this.recordType = recordType;
-            this.type = type;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Pair) {
-                final Pair pairObj = (Pair) obj;
-                return recordType.equals(pairObj.recordType) && type.equals(pairObj.type);
-            } else return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return 31 * recordType.hashCode() + type.hashCode();
-        }
-    }
-
     public JooqIntrospectionMapper(Configuration configuration, RecordMapperProvider fallbackProvider) {
         Objects.requireNonNull(configuration);
         this.fallbackProvider = fallbackProvider;
@@ -110,7 +84,7 @@ public class JooqIntrospectionMapper implements RecordMapperProvider {
             }
             // Otherwise check to see if the field is on the of bean's settable properties
             for (BeanProperty<E, Object> property : beanProperties) {
-                final String name = property.getName();
+                final String name = Utils.getName(property);
                 if (!property.isReadOnly() && property.getType().isAssignableFrom(field.getType()) &&
                         (name.equalsIgnoreCase(field.getName()) || name.equalsIgnoreCase(normalized))
                 ) {
