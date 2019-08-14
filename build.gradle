@@ -12,6 +12,5 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.jooq', name: 'jooq', version: '3.11.11'
-    compile group: 'io.micronaut', name: 'micronaut-core', version: '1.2.0'
+    compile group: 'io.micronaut.configuration', name: 'micronaut-jooq', version: '1.2.0'
 }

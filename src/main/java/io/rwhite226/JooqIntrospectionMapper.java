@@ -8,6 +8,8 @@ import org.jooq.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
 
+@Singleton
 public class JooqIntrospectionMapper implements RecordMapperProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JooqIntrospectionMapper.class);
@@ -34,6 +37,7 @@ public class JooqIntrospectionMapper implements RecordMapperProvider {
         this.configuration = configuration;
     }
 
+    @Inject
     public JooqIntrospectionMapper(Configuration configuration) {
         this(configuration, null);
     }

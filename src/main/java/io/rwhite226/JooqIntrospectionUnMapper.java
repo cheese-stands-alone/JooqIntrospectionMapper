@@ -5,11 +5,14 @@ import io.rwhite226.unmappers.MapUnMapper;
 import io.rwhite226.unmappers.PojoUnMapper;
 import org.jooq.*;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@Singleton
 public class JooqIntrospectionUnMapper implements RecordUnmapperProvider {
 
     // Map of cached RecordMappers
@@ -23,6 +26,11 @@ public class JooqIntrospectionUnMapper implements RecordUnmapperProvider {
         Objects.requireNonNull(configuration);
         this.configuration = configuration;
         this.fallbackProvider = fallbackProvider;
+    }
+
+    @Inject
+    public JooqIntrospectionUnMapper(Configuration configuration) {
+        this(configuration, null);
     }
 
     @Override
